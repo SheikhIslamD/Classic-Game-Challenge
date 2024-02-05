@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BallScript : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class BallScript : MonoBehaviour
     public Image[] livesImage = new Image[4];
     public GameObject endScreen;
     public TextMeshProUGUI endText;
+
+    public int score = 0;
+    public string levelName;
+    public TextMeshProUGUI scoreText;
 
     Rigidbody2D rb;
     // Start is called before the first frame update
@@ -44,6 +49,22 @@ public class BallScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Brick"))
         {
             Destroy(collision.gameObject);
+            score++;
+            int text = score;
+            scoreText.text = text.ToString();
+        }
+        if (score == 42)
+        {
+            //next level
+            SceneManager.LoadScene(levelName);
+        }
+        if (score == 84)
+        {
+            //game over win
+            endScreen.SetActive(true);
+            string text = "You Win!";
+            endText.text = text.ToString();
+            Time.timeScale = 0;
         }
     }
 
@@ -62,7 +83,7 @@ public class BallScript : MonoBehaviour
         }
         if (lives == 0)
         {
-            //game over
+            //game over loss
             endScreen.SetActive(true);
             string text = "You Lose!";
             endText.text = text.ToString();
