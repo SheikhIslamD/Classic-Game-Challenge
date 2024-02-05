@@ -5327,6 +5327,7 @@ MonoBehaviour:
   - {fileID: 2063981359}
   endScreen: {fileID: 1898387259}
   endText: {fileID: 1430634525}
+  crushParticles: {fileID: 0}
   score: 0
   scoreToWin: 0
   levelNum: 2
@@ -5435,7 +5436,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1cdde5796fc6b184d8363f7bdcd24bdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
