@@ -16,8 +16,13 @@ public class BallScript : MonoBehaviour
     public GameObject endScreen;
     public TextMeshProUGUI endText;
 
+    public ParticleSystem crushParticles;
+
     public int score = 0;
-    public string levelName;
+    [HideInInspector]
+    public int scoreToWin;
+    public int levelNum;
+    public string levelName; //name of next level
     public TextMeshProUGUI scoreText;
 
     Rigidbody2D rb;
@@ -48,17 +53,18 @@ public class BallScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Brick"))
         {
+            crushParticles.Play();
             Destroy(collision.gameObject);
             score++;
             int text = score;
             scoreText.text = text.ToString();
         }
-        if (score == 42)
+        if (score == scoreToWin && levelNum == 1)
         {
             //next level
             SceneManager.LoadScene(levelName);
         }
-        if (score == 84)
+        if (score == scoreToWin && levelNum == 2)
         {
             //game over win
             endScreen.SetActive(true);

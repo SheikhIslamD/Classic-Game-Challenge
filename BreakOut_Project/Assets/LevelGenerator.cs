@@ -7,6 +7,8 @@ public class LevelGenerator : MonoBehaviour
     public Vector2Int size;
     public Vector2 offset;
     public GameObject brickPrefab;
+
+    int brickAmount = 0;
     // Start is called before the first frame update
     void Awake()
     {
@@ -14,10 +16,12 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < size.y; j++)
             {
+                brickAmount++;
                 GameObject newBrick = Instantiate(brickPrefab, transform);
                 newBrick.transform.position = transform.position + new Vector3((float)((size.x - 1) * 0.5f - i) * offset.x, j * offset.y, 0);
             }
         }
+        GameObject.Find("Ball").GetComponent<BallScript>().scoreToWin = brickAmount;
     }
 }
 
