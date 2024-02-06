@@ -91,7 +91,7 @@ public class BallScript : MonoBehaviour
         {
             //game over loss
             endScreen.SetActive(true);
-            string text = "You Lose!";
+            string text = "Game Over";
             endText.text = text.ToString();
             Time.timeScale = 0;
         }
