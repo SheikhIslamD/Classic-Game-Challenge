@@ -25,8 +25,15 @@ public class BallScript : MonoBehaviour
     public string levelName; //name of next level
     public TextMeshProUGUI scoreText;
 
+    AudioScript audio;
+
     Rigidbody2D rb;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        audio = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioScript>();
+    }
     void Start()
     {
        rb = GetComponent<Rigidbody2D>(); 
@@ -41,6 +48,7 @@ public class BallScript : MonoBehaviour
             transform.position = Vector3.zero;
             rb.velocity = Vector3.zero;
             LifeUpdate();
+            audio.playEffect(audio.fall);
         }
 
         if(rb.velocity.magnitude > maxVelocity)
@@ -58,6 +66,7 @@ public class BallScript : MonoBehaviour
             score++;
             int text = score;
             scoreText.text = text.ToString();
+            audio.playEffect(audio.brick);
         }
         if (score == scoreToWin && levelNum == 1)
         {
@@ -71,6 +80,15 @@ public class BallScript : MonoBehaviour
             string text = "You Win!";
             endText.text = text.ToString();
             Time.timeScale = 0;
+            audio.playEffect(audio.win);
+        }
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            audio.playEffect(audio.bounce);
+        }
+        if (collision.gameObject.CompareTag("Paddle"))
+        {
+            audio.playEffect(audio.deflect);
         }
     }
 
@@ -94,6 +112,7 @@ public class BallScript : MonoBehaviour
             string text = "Game Over";
             endText.text = text.ToString();
             Time.timeScale = 0;
+            audio.playEffect(audio.loss);
         }
     }
 }
